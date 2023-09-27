@@ -1,4 +1,4 @@
-package com.ccastro.cooking
+package com.ccastro.cooking.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,9 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ccastro.cooking.presentation.theme.CookingTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.ccastro.cooking.presentation.screens.home.HomeScreen
+import com.ccastro.cooking.presentation.ui.theme.CookingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var navHostControler: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +29,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    navHostControler = rememberNavController()
+                    //Greeting(name = "Cristian 😊💕")
+                    HomeScreen()
                 }
             }
         }

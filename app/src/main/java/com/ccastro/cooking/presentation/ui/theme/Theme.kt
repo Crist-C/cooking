@@ -1,4 +1,4 @@
-package com.ccastro.cooking.presentation.theme
+package com.ccastro.cooking.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

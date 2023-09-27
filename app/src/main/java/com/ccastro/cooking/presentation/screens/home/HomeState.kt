@@ -1,5 +1,7 @@
 package com.ccastro.cooking.presentation.screens.home
 
+import com.ccastro.cooking.domain.models.Receta
+
 data class HomeState(
-    val test: String
+    var recetas: List<Receta> = emptyList()
 )

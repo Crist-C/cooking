@@ -11,7 +11,7 @@ plugins {
     id("com.google.dagger.hilt.android")
 
     // Google Services
-    id("com.google.gms.google-services")
+    //id("com.google.gms.google-services")
 }
 
 android {
