@@ -1,6 +1,6 @@
-package com.ccastro.cooking.di
+package com.ccastro.cooking.di.domain
 
-import com.ccastro.cooking.data.repositories.IRecetaRepositoryImplement
+import com.ccastro.cooking.data.repositories.RecetaRepositoryImplement
 import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import com.ccastro.cooking.domain.useCases.receta.ObtenerTodas
 import com.ccastro.cooking.domain.useCases.receta.ObtenerUnaPorId
@@ -20,7 +20,7 @@ object DomainModule {
     @Singleton
     @Provides
     @Named("IRecetaRepository")
-    fun provideIRecetaRepository(@Named("RecetaRepositoryImpl") repositoryImplement: IRecetaRepositoryImplement): IRecetaRepository = repositoryImplement
+    fun provideIRecetaRepository(@Named("RecetaRepositoryImpl") repositoryImplement: RecetaRepositoryImplement): IRecetaRepository = repositoryImplement
 
 
     @Singleton

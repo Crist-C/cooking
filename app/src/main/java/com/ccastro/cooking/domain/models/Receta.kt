@@ -6,5 +6,6 @@ data class Receta(
     val imagenes: List<String>,
     val location: Location,
     val ingredientes: List<Ingredientes>,
-    val preparacion: String
+    val preparacion: String,
+    val favorito: Boolean = false
 )

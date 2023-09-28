@@ -1,7 +1,8 @@
-package com.ccastro.cooking.di
+package com.ccastro.cooking.di.data
 
-import com.ccastro.cooking.data.api.recetas.RecetaDAO
-import com.ccastro.cooking.data.repositories.IRecetaRepositoryImplement
+import com.ccastro.cooking.data.api.recetas.RecetaApiDAO
+import com.ccastro.cooking.data.dataSources.local.daos.RecetaDAO
+import com.ccastro.cooking.data.repositories.RecetaRepositoryImplement
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +15,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+object DataApisModule {
 
-    // DEPENDENCIAS DE RETROFIT
+    // DEPENDENCIAS PARA EL CONSUMO DE API's
     @Singleton
     @Provides
     @Named("UrlBaseRecetas")
@@ -37,13 +38,15 @@ object DataModule {
     }
 
     @Provides
-    @Named("RecetaDAO")
-    fun provideRecetaDAO(@Named("APIClientRecetas") apiClient: Retrofit): RecetaDAO =
-        apiClient.create(RecetaDAO::class.java)
+    @Named("RecetaApiDAO")
+    fun provideRecetaDAO(@Named("APIClientRecetas") apiClient: Retrofit): RecetaApiDAO =
+        apiClient.create(RecetaApiDAO::class.java)
 
     @Provides
     @Named("RecetaRepositoryImpl")
-    fun providesRecetaRepositoryImpl(@Named("RecetaDAO") recetaDAO: RecetaDAO):
-            IRecetaRepositoryImplement = IRecetaRepositoryImplement(recetaDAO)
+    fun providesRecetaRepositoryImpl(
+        @Named("RecetaApiDAO") recetaApiDAO: RecetaApiDAO,
+        @Named("RecetaDbDAO") recetaDbDAO: RecetaDAO):
+            RecetaRepositoryImplement = RecetaRepositoryImplement(recetaApiDAO, recetaDbDAO)
 
 }

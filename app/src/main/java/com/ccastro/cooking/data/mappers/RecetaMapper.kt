@@ -1,14 +1,15 @@
 package com.ccastro.cooking.data.mappers
 
-import com.ccastro.cooking.data.models.RecetaDTO
+import com.ccastro.cooking.data.models.dto.RecetaApiDTO
+import com.ccastro.cooking.data.models.entities.RecetaDBEntity
 import com.ccastro.cooking.domain.models.Receta
 
 object RecetaMapper {
 
-    fun mapRecetaToRecetaDTO(receta: Receta) : RecetaDTO {
-        return RecetaDTO(
+    fun mapRecetaToRecetaDTO(receta: Receta) : RecetaApiDTO {
+        return RecetaApiDTO(
             id = receta.id,
-            nombre_receta = receta.nombre,
+            nombreReceta = receta.nombre,
             imagenes = receta.imagenes,
             localizacion = receta.location,
             ingredientes = receta.ingredientes,
@@ -16,14 +17,39 @@ object RecetaMapper {
         )
     }
 
-    fun mapRecetaDTOToReceta(recetaDTO: RecetaDTO) : Receta {
+    fun mapRecetaDTOToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
         return Receta(
-            id = recetaDTO.id,
-            nombre = recetaDTO.nombre_receta,
-            imagenes = recetaDTO.imagenes,
-            location = recetaDTO.localizacion,
-            ingredientes = recetaDTO.ingredientes,
-            preparacion = recetaDTO.procedimiento
+            id = recetaApiDTO.id,
+            nombre = recetaApiDTO.nombreReceta,
+            imagenes = recetaApiDTO.imagenes,
+            location = recetaApiDTO.localizacion,
+            ingredientes = recetaApiDTO.ingredientes,
+            preparacion = recetaApiDTO.procedimiento
         )
     }
+
+    fun mapRecetaToRecetaDBEntity(receta: Receta): RecetaDBEntity {
+        return RecetaDBEntity(
+            idReceta = receta.id,
+            nombreReceta = receta.nombre,
+            imagenes = receta.imagenes,
+            localizacion = receta.location,
+            ingredientes = receta.ingredientes,
+            procedimiento = receta.preparacion
+        )
+    }
+
+    fun mapRecetaDBEntityToReceta(recetaDBEntity: RecetaDBEntity): Receta {
+        return Receta(
+            id = recetaDBEntity.idReceta,
+            nombre = recetaDBEntity.nombreReceta,
+            imagenes = recetaDBEntity.imagenes,
+            location = recetaDBEntity.localizacion,
+            ingredientes = recetaDBEntity.ingredientes,
+            preparacion = recetaDBEntity.procedimiento
+        )
+    }
+
+
+
 }
