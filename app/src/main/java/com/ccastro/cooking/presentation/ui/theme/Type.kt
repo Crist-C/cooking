@@ -19,6 +19,8 @@ val InterFamily: FontFamily = FontFamily(
     Font(R.font.inter_thin, FontWeight.Thin)
 )
 
+
+
 // Set of Material typography styles to start with
 val defaultTypography = Typography()
 val Typography = Typography(

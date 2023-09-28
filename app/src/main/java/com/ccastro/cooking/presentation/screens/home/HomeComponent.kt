@@ -28,7 +28,7 @@ fun HomeScreenContent(viewModel: HomeViewModel = hiltViewModel()) {
                 listOf(
                     Receta(
                         nombre = "Sancocho",
-                        imagenes = listOf("Url1", "Url2", "Url3"),
+                        imagenes = listOf("https://cdn.colombia.com/gastronomia/2011/07/28/sancocho-de-cola-1650.webp", "https://picsum.photos/id/10/500/700", "Url3"),
                         location = Location("Colombia", 7.1f,12.4f),
                         ingredientes = listOf(Ingredientes("Papa", "1 libra")),
                         preparacion = "Cocinar a fuego lento"
@@ -36,7 +36,7 @@ fun HomeScreenContent(viewModel: HomeViewModel = hiltViewModel()) {
                 )
             }
         ) {
-            RecetaComponent(receta = it)
+            RecetaOnListComponent(receta = it)
         }
     }
 }

@@ -31,7 +31,6 @@ class RecetaRepositoryImplement @Inject constructor(
 
             GlobalScope.launch { persistenciaLocal(listaRetorno) }
 
-            persistenciaLocal(listaRetorno)
             return listaRetorno.toList()
         }catch (e: Exception) {
             println("$e")
