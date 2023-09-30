@@ -13,7 +13,8 @@ object RecetaMapper {
             imagenes = receta.imagenes,
             localizacion = receta.location,
             ingredientes = receta.ingredientes,
-            procedimiento = receta.preparacion
+            procedimiento = receta.preparacion,
+            descripcion = receta.descripcion
         )
     }
 
@@ -24,7 +25,8 @@ object RecetaMapper {
             imagenes = recetaApiDTO.imagenes,
             location = recetaApiDTO.localizacion,
             ingredientes = recetaApiDTO.ingredientes,
-            preparacion = recetaApiDTO.procedimiento
+            preparacion = recetaApiDTO.procedimiento,
+            descripcion = recetaApiDTO.descripcion
         )
     }
 
@@ -35,7 +37,8 @@ object RecetaMapper {
             imagenes = receta.imagenes,
             localizacion = receta.location,
             ingredientes = receta.ingredientes,
-            procedimiento = receta.preparacion
+            procedimiento = receta.preparacion,
+            resumen = receta.descripcion
         )
     }
 
@@ -46,7 +49,8 @@ object RecetaMapper {
             imagenes = recetaDBEntity.imagenes,
             location = recetaDBEntity.localizacion,
             ingredientes = recetaDBEntity.ingredientes,
-            preparacion = recetaDBEntity.procedimiento
+            preparacion = recetaDBEntity.procedimiento,
+            descripcion = recetaDBEntity.resumen
         )
     }
 

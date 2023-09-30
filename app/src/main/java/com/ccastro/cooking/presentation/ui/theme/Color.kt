@@ -46,3 +46,5 @@ val Gray40 = Color(0xFFCED8BB)
 val Gray80 = Color(0xFF757575)
 val Gray500 = Color(0xFF3C3C3C)
 val Gray700 = Color(0xFF232420)
+
+val TextColor = Color(0xFF262626)

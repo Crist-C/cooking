@@ -9,5 +9,6 @@ data class RecetaApiDTO(
     val imagenes: List<String>,
     val localizacion: Location,
     val ingredientes: List<Ingredientes>,
-    val procedimiento: String
+    val procedimiento: String,
+    val descripcion: String
 )

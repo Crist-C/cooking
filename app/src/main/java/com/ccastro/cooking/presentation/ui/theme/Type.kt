@@ -23,6 +23,7 @@ val InterFamily: FontFamily = FontFamily(
 
 // Set of Material typography styles to start with
 val defaultTypography = Typography()
+
 val Typography = Typography(
 
     displayLarge = defaultTypography.displayLarge.copy(fontFamily = InterFamily),

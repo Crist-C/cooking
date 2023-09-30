@@ -101,7 +101,10 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)
 
-    // Utils (Lerp)
+    // Animations
+    implementation(libs.lottie)
+
+    // Lerp: Mat vectorial operations
     implementation(libs.androidx.ui.util)
 
     // Retrofit

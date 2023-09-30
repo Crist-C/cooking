@@ -9,7 +9,7 @@ import com.ccastro.cooking.data.mappers.LocationConverter
 import com.ccastro.cooking.data.mappers.StringListMapper
 import com.ccastro.cooking.data.models.entities.RecetaDBEntity
 
-@Database(entities = [RecetaDBEntity::class], version = 1)
+@Database(entities = [RecetaDBEntity::class], version = 4)
 @TypeConverters(StringListMapper::class, IngredientesListMapper::class, LocationConverter::class)
 abstract class LocalDataBase: RoomDatabase() {
     abstract fun RecetasDAO(): RecetaDAO

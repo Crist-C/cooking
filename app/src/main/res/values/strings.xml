@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">cooking</string>
     <string name="imagen_receta_descripcion">imagen de la receta</string>
+    <string name="ir_a_prepararlo">ir a prepararlo</string>
+    <string name="deseo_prepararlo">Deseo prepararlo!</string>
 </resources>

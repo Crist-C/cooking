@@ -1,24 +1,18 @@
-package com.ccastro.cooking.presentation.screens.home
+package com.ccastro.cooking.presentation.screens.map
 
 import android.annotation.SuppressLint
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navHost: NavHostController) {
-
-    Scaffold(
+fun MapScreen(navHostController: NavHostController) {
+    Scaffold (
         topBar = {},
         content = {
-                  HomeScreenContent(navHost = navHost)
+                  MapContent(navHostController)
         },
-        bottomBar = {
-            BottomAppBar {
-
-            }
-        }
+        bottomBar = {}
     )
 }
