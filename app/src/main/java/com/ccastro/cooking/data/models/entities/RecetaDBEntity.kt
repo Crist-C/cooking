@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.ccastro.cooking.domain.models.Ingredientes
 import com.ccastro.cooking.domain.models.Location
 
-@Entity(tableName = "recetas",)
+@Entity(tableName = "recetas")
 data class RecetaDBEntity(
     @PrimaryKey(autoGenerate = false) val idReceta: Int,
     val nombreReceta: String,
@@ -13,5 +13,6 @@ data class RecetaDBEntity(
     val localizacion: Location,
     val ingredientes: List<Ingredientes>,
     val procedimiento: String,
-    val resumen: String
+    val resumen: String,
+    val favorito: Boolean
 )

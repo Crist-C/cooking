@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.ccastro.cooking.presentation.components.RecetaItem
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 
 @Composable

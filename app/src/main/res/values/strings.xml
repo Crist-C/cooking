@@ -3,4 +3,6 @@
     <string name="imagen_receta_descripcion">imagen de la receta</string>
     <string name="ir_a_prepararlo">ir a prepararlo</string>
     <string name="deseo_prepararlo">Deseo prepararlo!</string>
+    <string name="ic_mas">Icono mostrar mas texto</string>
+    <string name="descripci_n">Descripción</string>
 </resources>

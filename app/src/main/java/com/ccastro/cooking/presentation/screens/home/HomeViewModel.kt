@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.ccastro.cooking.presentation.useCases.RecetaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -23,14 +22,13 @@ class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val r
     }
 
     private fun actualizarRecetas() {
-        viewModelScope.launch {
-            val recetasResult = async {
-                recetasUseCases.getAll()
+
+        val obtenerRecetasCoroutine = viewModelScope.async{
+            recetasUseCases.getAll().collect(){
+                state = state.copy( recetas = it)
             }
-            state = state.copy(
-                recetas = recetasResult.await()
-            )
         }
+
     }
 
 }

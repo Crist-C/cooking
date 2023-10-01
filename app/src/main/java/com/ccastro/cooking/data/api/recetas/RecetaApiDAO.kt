@@ -9,7 +9,7 @@ interface RecetaApiDAO {
     @GET("/listarRecetas")
     suspend fun getAll(): List<RecetaApiDTO>
 
-    @GET("/obtenerReceta/id={recetaId}")
-    suspend fun getRecetaById(@Path("recetaId") recetaId: Int): RecetaApiDTO
+    @GET("/obtenerReceta/id={id}")
+    suspend fun getById(@Path("id") id: Int): RecetaApiDTO
 
 }

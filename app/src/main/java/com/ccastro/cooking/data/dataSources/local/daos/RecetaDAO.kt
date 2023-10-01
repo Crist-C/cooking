@@ -14,9 +14,9 @@ interface RecetaDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(receta: RecetaDBEntity)
 
-    @Query("SELECT * FROM recetas WHERE idReceta = :id")
-    suspend fun read(id: Int): RecetaDBEntity
-
     @Query("SELECT * FROM recetas")
-    fun getAll(): Flow<List<RecetaDBEntity>>?
+    fun getAll(): Flow<List<RecetaDBEntity>>
+
+    @Query("SELECT * FROM recetas WHERE idReceta = :id")
+    suspend fun getById(id: Int): RecetaDBEntity
 }

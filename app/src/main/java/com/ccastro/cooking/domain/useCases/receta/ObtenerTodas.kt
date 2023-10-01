@@ -7,5 +7,5 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class ObtenerTodas @Inject constructor(@Named("IRecetaRepository") private val IRecetaRepository: IRecetaRepository) {
-    suspend operator fun invoke(): List<Receta> = IRecetaRepository.obtenerTodas()
+    suspend operator fun invoke(): Flow<List<Receta>> = IRecetaRepository.obtenerTodasLasRecetas()
 }

@@ -2,11 +2,7 @@ package com.ccastro.cooking.presentation.components
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
@@ -22,43 +18,36 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.ccastro.cooking.R
 import com.ccastro.cooking.presentation.ui.theme.Blue80
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 
 @Composable
-fun DefaultButton(
+fun CustomButton(
+    resourcedText: Int,
     modifier: Modifier = Modifier,
-    text: String,
-    onClick: () -> Unit,
-    colors: ButtonColors = ButtonDefaults.filledTonalButtonColors(),
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
     icon: ImageVector? = null,//Icons.Default.ArrowForward
     shape: CornerBasedShape = ShapeDefaults.ExtraLarge,
-    enable: Boolean = true
+    enable: Boolean = true,
+    onClick: () -> Unit
 ) {
 
     Button(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
+        modifier = modifier.wrapContentSize(),
         onClick = { onClick() },
         colors = colors,
         shape = shape,
         enabled = enable
     ){
         if (icon != null) {
-            Icon(
-                imageVector = icon,
-                contentDescription = ""
-            )
+            Icon(imageVector = icon,contentDescription = "")
         }
-        Spacer(modifier = Modifier.width(10.dp))
         Text(
-            modifier = Modifier.padding(2.dp),
-            text = text,
-            //style = MaterialTheme.typography.titleLarge,
+            text = stringResource(id = resourcedText),
             fontWeight = FontWeight.SemiBold
         )
 
@@ -68,11 +57,7 @@ fun DefaultButton(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ClickableCustomColor(
-    color: Color = Blue80,
-    onClick: () -> Unit,
-    content: @Composable () -> Unit
-) {
+fun ClickableCustomColor( color: Color = Blue80, onClick: () -> Unit, content: @Composable () -> Unit) {
     val indication = rememberRipple(color = color) // Cambia el color aquí
     CompositionLocalProvider(LocalIndication provides indication) {
         Surface(modifier = Modifier.clickable(onClick = onClick), content = content)
@@ -83,6 +68,6 @@ fun ClickableCustomColor(
 @Composable
 fun DefaultButtonPreview(){
     CookingTheme() {
-        DefaultButton(text = "AGREGAR TARJETA", onClick = {})
+        CustomButton(resourcedText = R.string.imagen_receta_descripcion, onClick = {})
     }
 }

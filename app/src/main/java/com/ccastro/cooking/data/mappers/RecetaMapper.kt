@@ -18,7 +18,7 @@ object RecetaMapper {
         )
     }
 
-    fun mapRecetaDTOToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
+    fun mapRecetaApiDTOToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
         return Receta(
             id = recetaApiDTO.id,
             nombre = recetaApiDTO.nombreReceta,
@@ -30,6 +30,14 @@ object RecetaMapper {
         )
     }
 
+    fun mapListRecetaApiDTOToListReceta(listRecetaApiDTO: List<RecetaApiDTO>) : List<Receta> {
+
+        val listaRetorno: MutableList<Receta> = mutableListOf()
+        listRecetaApiDTO.map { listaRetorno.add( mapRecetaApiDTOToReceta(it)) }
+        return listaRetorno
+
+    }
+
     fun mapRecetaToRecetaDBEntity(receta: Receta): RecetaDBEntity {
         return RecetaDBEntity(
             idReceta = receta.id,
@@ -38,7 +46,8 @@ object RecetaMapper {
             localizacion = receta.location,
             ingredientes = receta.ingredientes,
             procedimiento = receta.preparacion,
-            resumen = receta.descripcion
+            resumen = receta.descripcion,
+            favorito = receta.favorito
         )
     }
 
@@ -54,6 +63,12 @@ object RecetaMapper {
         )
     }
 
+    fun mapListRecetaDBEntityToListReceta(listRecetaDBEntity: List<RecetaDBEntity>) : List<Receta> {
 
+        val listaRetorno: MutableList<Receta> = mutableListOf()
+        listRecetaDBEntity.map { listaRetorno.add( mapRecetaDBEntityToReceta(it)) }
+        return listaRetorno
+
+    }
 
 }
