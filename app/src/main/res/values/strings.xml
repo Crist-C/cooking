@@ -9,4 +9,7 @@
     <string name="preparaci_n">Preparación</string>
     <string name="que_deseas_buscar">¿Que deseas buscar?</string>
     <string name="buscar">Buscar</string>
+    <string name="icono_de_busqueda">Icono de busqueda</string>
+    <string name="icono_cancelar_busqueda">Icono cancelar busqueda</string>
+    <string name="no_se_encontr_alg_na_coincidencia">No se encontró algúna coincidencia</string>
 </resources>

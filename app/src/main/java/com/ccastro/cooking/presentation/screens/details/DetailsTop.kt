@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.ccastro.cooking.presentation.components.IconImageClicked
+import com.ccastro.cooking.presentation.components.genericos.IconImageClicked
 import com.ccastro.cooking.presentation.navigation.AppScreens.home
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 

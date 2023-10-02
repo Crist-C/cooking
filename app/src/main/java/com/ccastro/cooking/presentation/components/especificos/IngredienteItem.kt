@@ -1,4 +1,4 @@
-package com.ccastro.cooking.presentation.components
+package com.ccastro.cooking.presentation.components.especificos
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ccastro.cooking.domain.models.Ingredientes
+import com.ccastro.cooking.presentation.components.genericos.ParagraphText
 import com.ccastro.cooking.presentation.ui.theme.Green40
 
 @Composable

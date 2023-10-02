@@ -1,4 +1,4 @@
-package com.ccastro.cooking.presentation.components
+package com.ccastro.cooking.presentation.components.genericos
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,23 +46,6 @@ fun AsyncImage(url: String, modifier: Modifier = Modifier) {
         modifier = modifier,
         contentScale = ContentScale.Crop,
         contentDescription = stringResource(R.string.imagen_receta_descripcion)
-    )
-}
-
-@Composable
-fun AsyncImageWithoutLoader(url: String, modifier: Modifier = Modifier) {
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(url)
-            .crossfade(true)
-            .build(),
-        placeholder = painterResource(R.drawable.placeholder_white_2),
-        contentDescription = stringResource(R.string.imagen_receta_descripcion),
-        contentScale = ContentScale.FillBounds,
-        modifier = modifier
-            .clip(CircleShape)
-            .height(150.dp)
-            .heightIn(150.dp, 300.dp)
     )
 }
 

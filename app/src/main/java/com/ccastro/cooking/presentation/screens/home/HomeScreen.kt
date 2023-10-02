@@ -10,9 +10,11 @@ import androidx.navigation.NavHostController
 fun HomeScreen(navHost: NavHostController) {
 
     Scaffold(
-        topBar = {},
+        topBar = {
+            HomeScreenTopBar(navHost)
+        },
         content = {
-                  HomeScreenContent(navHost = navHost)
+
         },
         bottomBar = {
 

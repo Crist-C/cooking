@@ -1,4 +1,4 @@
-package com.ccastro.cooking.presentation.components
+package com.ccastro.cooking.presentation.components.genericos
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalIndication

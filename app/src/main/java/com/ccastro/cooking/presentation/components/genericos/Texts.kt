@@ -1,4 +1,4 @@
-package com.ccastro.cooking.presentation.components
+package com.ccastro.cooking.presentation.components.genericos
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -66,13 +66,14 @@ fun TittleTerciaryText(text: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun InformativeText(text: String, modifier: Modifier = Modifier) {
+fun InformativeText(text: String, modifier: Modifier = Modifier, align: TextAlign = TextAlign.Start) {
     Text(
         text = text,
         style = MaterialTheme.typography.displaySmall,
         fontSize = 14.sp,
         color = MaterialTheme.colorScheme.onBackground,
-        modifier = modifier
+        modifier = modifier,
+        textAlign = align
     )
 }
 
