@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "28123097358",
+    "project_id": "cooking-pruebatecnica",
+    "storage_bucket": "cooking-pruebatecnica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28123097358:android:02ebd51bc9712fc06a8f5f",
+        "android_client_info": {
+          "package_name": "com.ccastro.cooking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIA2WO8rmjCff98v1uAJ1Vw-I8Ani6Bvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

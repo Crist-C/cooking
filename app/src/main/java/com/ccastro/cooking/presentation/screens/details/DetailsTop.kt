@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.presentation.components.genericos.IconImageClicked
-import com.ccastro.cooking.presentation.navigation.AppScreens.home
+import com.ccastro.cooking.presentation.navigation.AppScreens.Home
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,7 +29,7 @@ fun DetailsTop(navHost: NavHostController) {
         },
         navigationIcon ={
             IconImageClicked(Icons.Outlined.ArrowBack, Modifier.size(50.dp).clip(CircleShape)){
-                navHost.navigate(home.route)
+                navHost.navigate(Home.route)
             }
         }
 

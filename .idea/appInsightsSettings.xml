@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.ccastro.cooking" />
+                  <option name="mobileSdkAppId" value="1:28123097358:android:02ebd51bc9712fc06a8f5f" />
+                  <option name="projectId" value="cooking-pruebatecnica" />
+                  <option name="projectNumber" value="28123097358" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

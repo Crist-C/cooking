@@ -10,8 +10,9 @@ plugins {
     id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
-    // Google Services
-    //id("com.google.gms.google-services")
+    // Maps and Google Services
+    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id ("com.google.gms.google-services")
 }
 
 android {
@@ -97,7 +98,7 @@ dependencies {
     // Pager
     implementation(libs.accompanist.pager)
 
-    // Coil : descargar y visualizar imagenes desde una url
+    // Coil
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)
 
@@ -124,5 +125,13 @@ dependencies {
     testImplementation(libs.androidx.room.testing)
     // optional - Paging 3 Integration
     implementation(libs.androidx.room.paging)
+
+    // Maps
+    implementation (libs.play.services.maps)
+    implementation (libs.maps.compose)
+    // Optionally, you can include the Compose utils library for Clustering, etc.
+    implementation (libs.maps.compose.utils)
+    // Optionally, you can include the widgets library for ScaleBar, etc.
+    implementation (libs.maps.compose.widgets)
 
 }

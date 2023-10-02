@@ -77,7 +77,7 @@ fun DetailsContent(
     ) {
 
         ImagesPresentation(state.receta.imagenes, imagesSize = 250)
-        InformacionDeReceta(receta = state.receta)
+        InformacionDeReceta(receta = state.receta, navHost = navHost)
         IngredientesComponent(state.receta.ingredientes)
         Preparacion(preparacion = state.receta.preparacion)
 
@@ -148,7 +148,7 @@ fun StateDots(count: Int, pageState: PagerState, modifier: Modifier = Modifier) 
 }
 
 @Composable
-fun InformacionDeReceta(receta: Receta, modifier: Modifier = Modifier) {
+fun InformacionDeReceta(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController) {
 
     Column(modifier) {
         TittleText(text = receta.nombre)
@@ -157,8 +157,12 @@ fun InformacionDeReceta(receta: Receta, modifier: Modifier = Modifier) {
             ParagraphText(text = receta.descripcion)
         }
         ClickableCustomColor {
-            LocationInformation(location = receta.location, Arrangement.Start,
-                Modifier.wrapContentSize().padding(top = 8.dp))
+            LocationInformation(
+                location = receta.location, Arrangement.Start,
+                modifier = Modifier.wrapContentSize().padding(top = 8.dp),
+                navHost = navHost
+            )
+
         }
     }
 

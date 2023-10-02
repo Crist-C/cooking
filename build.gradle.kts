@@ -16,5 +16,8 @@ plugins {
     // Hilt
     id(id = "com.google.dagger.hilt.android") version "2.44" apply false
 
+    // Maps API_KEY
+    id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
+
 }
 true // Needed to make the Suppress annotation work for the plugins block

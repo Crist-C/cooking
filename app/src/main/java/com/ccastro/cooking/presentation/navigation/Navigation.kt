@@ -1,5 +1,6 @@
 package com.ccastro.cooking.presentation.navigation
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -15,18 +16,29 @@ fun AppNavigation(navHostController: NavHostController) {
 
     NavHost(
         navController = navHostController,
-        startDestination = AppScreens.home.route
+        startDestination = AppScreens.Home.route
     ) {
-        composable(route = AppScreens.home.route) {
+        composable(route = AppScreens.Home.route) {
             HomeScreen(navHostController)
         }
-        composable(AppScreens.detail.route+"/{id}", arguments = listOf(navArgument(name = "id") {
+        composable(AppScreens.Detail.route+"/{${NavArguments.RecetaId.key}}",
+            arguments = listOf(navArgument(name = NavArguments.RecetaId.key) {
             type = NavType.StringType
         }) ) {
-            DetailsScreen(navHostController, id = it.arguments?.getString("id"))
+            DetailsScreen(navHostController, id = it.arguments?.getString(NavArguments.RecetaId.key))
         }
-        composable(AppScreens.map.route) {
-            MapScreen(navHostController)
+        composable(AppScreens.Map.route+"/{${NavArguments.Location.key}}",
+            arguments = listOf(navArgument(name = NavArguments.Location.key) {
+            type = NavType.StringType
+        })) {it->
+            it.arguments?.getString(NavArguments.Location.key).let { locationString->
+                MapScreen(navHostController, location = Uri.decode(locationString))
+            }
         }
     }
+}
+
+sealed class NavArguments(val key: String) {
+    object RecetaId: NavArguments("id")
+    object Location: NavArguments("location")
 }

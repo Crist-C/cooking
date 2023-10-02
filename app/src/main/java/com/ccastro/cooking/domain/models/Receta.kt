@@ -4,7 +4,7 @@ class Receta(
     val id: Int = 0,
     val nombre: String = "",
     val imagenes: List<String> = emptyList(),
-    val location: Location = Location("","",0f,0f,""),
+    val location: Location = Location("","", 0.0,0.0,""),
     val ingredientes: List<Ingredientes> = emptyList(),
     val preparacion: String = "",
     val descripcion: String = "",

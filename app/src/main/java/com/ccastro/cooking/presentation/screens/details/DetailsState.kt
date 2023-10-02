@@ -9,7 +9,7 @@ data class DetailsState(
     val receta: Receta = Receta(
         nombre = "Aji de Gallina",
         imagenes = listOf("https://cdn.colombia.com/gastronomia/2011/07/28/sancocho-de-cola-1650.webp", "https://cdn.colombia.com/gastronomia/2011/07/28/sancocho-de-cola-1650.webp", "https://picsum.photos/id/10/500/700", "Url3"),
-        location = Location("https://media.istockphoto.com/id/967321126/es/vector/vector-de-bandera-del-per%C3%BA-proporci%C3%B3n-2-3-bandera-bicolor-nacional-peruana.jpg?s=1024x1024&w=is&k=20&c=MX21eYwejH9ob5FAAg9uU9Zj_U9qxoZVKAgzHHQM7ro=","Perú",-12.046374f,-77.04279f,"Lima"),
+        location = Location("https://media.istockphoto.com/id/967321126/es/vector/vector-de-bandera-del-per%C3%BA-proporci%C3%B3n-2-3-bandera-bicolor-nacional-peruana.jpg?s=1024x1024&w=is&k=20&c=MX21eYwejH9ob5FAAg9uU9Zj_U9qxoZVKAgzHHQM7ro=","Perú",-12.046374,-77.04279,"Lima"),
         ingredientes = listOf(
             Ingredientes("Pechugas de pollo", "500g"),
             Ingredientes("Aji amarillo", "4 unidades"),
