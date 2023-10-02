@@ -9,5 +9,6 @@ interface RecetaUseCases {
 
     suspend fun getOneById(id: Int): Receta
 
+    suspend fun updateFavorite(receta: Receta)
 
 }

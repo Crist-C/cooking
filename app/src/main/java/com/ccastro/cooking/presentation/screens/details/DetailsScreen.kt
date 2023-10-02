@@ -5,12 +5,13 @@ import android.widget.Toast
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DetailsScreen(navHost: NavHostController, id: String?, viewModel: DetalisViewModel = hiltViewModel()) {
+fun DetailsScreen(navHost: NavHostController, id: String?) {//, viewModel: DetalisViewModel = hiltViewModel()) {
 
     //val receta = viewModel.cargarReceta()
 
@@ -18,11 +19,17 @@ fun DetailsScreen(navHost: NavHostController, id: String?, viewModel: DetalisVie
 
     Scaffold(
         topBar = {
-            DetailsTop(navHost = navHost, title = "Aji de Gallina")
+            DetailsTop(navHost = navHost)
         },
         content = {
             DetailsContent(navHost = navHost)
         },
         bottomBar = {}
     )
+}
+
+@Preview
+@Composable
+fun DetailsScreenPreview() {
+    DetailsScreen(rememberNavController(), "1")
 }

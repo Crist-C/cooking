@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 data class RecetaUseCasesImpement(
     val obtenerPorId: ObtenerUnaPorId,
-    val obtenerTodas: ObtenerTodas
+    val obtenerTodas: ObtenerTodas,
+    val actualizarFavorito: ActualizarFavorito
 ): RecetaUseCases {
     override suspend fun getAll(): Flow<List<Receta>> {
         return obtenerTodas.invoke()
@@ -15,4 +16,10 @@ data class RecetaUseCasesImpement(
     override suspend fun getOneById(id: Int): Receta {
         return obtenerPorId.invoke(id)
     }
+
+    override suspend fun updateFavorite(receta: Receta) {
+        actualizarFavorito.invoke(receta)
+    }
+
+
 }

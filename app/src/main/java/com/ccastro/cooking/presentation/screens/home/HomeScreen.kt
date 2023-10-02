@@ -15,7 +15,7 @@ fun HomeScreen(navHost: NavHostController) {
                   HomeScreenContent(navHost = navHost)
         },
         bottomBar = {
-            //BottomAppBar(Modifier.wrapContentSize()) {}
+
         }
     )
 }

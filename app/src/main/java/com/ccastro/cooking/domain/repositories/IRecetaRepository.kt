@@ -8,4 +8,6 @@ interface IRecetaRepository {
 
     suspend fun obtenerPorId(id: Int): Receta
 
+    suspend fun actualizarFavorito(receta: Receta)
+
 }

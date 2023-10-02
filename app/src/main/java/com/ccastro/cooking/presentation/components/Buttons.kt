@@ -57,7 +57,7 @@ fun CustomButton(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ClickableCustomColor( color: Color = Blue80, onClick: () -> Unit, content: @Composable () -> Unit) {
+fun ClickableCustomColor( color: Color = Blue80, onClick: () -> Unit = {}, content: @Composable () -> Unit) {
     val indication = rememberRipple(color = color) // Cambia el color aquí
     CompositionLocalProvider(LocalIndication provides indication) {
         Surface(modifier = Modifier.clickable(onClick = onClick), content = content)

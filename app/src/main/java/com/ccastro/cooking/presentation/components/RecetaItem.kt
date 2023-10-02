@@ -1,6 +1,5 @@
 package com.ccastro.cooking.presentation.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons.Rounded
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
@@ -26,15 +24,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.R
-import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.domain.models.Ingredientes
 import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.navigation.AppScreens
-import com.ccastro.cooking.presentation.ui.theme.Blue200
+import com.ccastro.cooking.presentation.screens.home.HomeViewModel
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 
 @Composable
@@ -42,17 +40,16 @@ fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostCo
 
     val imagesMap = listOf("Left", "Center", "Rigth").zip(receta.imagenes).toMap()
 
-    imagesMap.forEach(){
-        Log.i(TAG, "${it.key} : ${it.value}")
-    }
-
     Surface (
-        modifier = modifier.wrapContentSize().padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = modifier
+            .wrapContentSize()
+            .padding(horizontal = 16.dp, vertical = 4.dp),
         shape = MaterialTheme.shapes.large,
         shadowElevation = 6.dp
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(1f)
+            modifier = Modifier
+                .fillMaxWidth(1f)
                 .padding(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 20.dp),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.Start
@@ -68,10 +65,10 @@ fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostCo
 }
 
 @Composable
-fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier) {
+fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
 
     val favoriteState = remember {
-        mutableStateOf(true)
+        mutableStateOf(receta.favorito)
     }
 
     Column(
@@ -89,36 +86,28 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier) {
             TittleText(text = receta.nombre)
 
             IconImageClicked(
-                iconResource = if(favoriteState.value) Rounded.FavoriteBorder else Rounded.Favorite,
-                modifier = Modifier.size(50.dp).clip(CircleShape), color = Blue200
+                iconResource = if(favoriteState.value) Rounded.Favorite else Rounded.FavoriteBorder,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
             ) {
                 favoriteState.value = !favoriteState.value
+                receta.favorito = favoriteState.value
+                viewModel.actualizarFavorito(receta)
             }
 
         }
 
-        Row(
-            Modifier.fillMaxWidth()
-                .padding(bottom = 4.dp), verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            AsyncImage( url = receta.location.urlImgBandera,
-                Modifier.size(32.dp, 24.dp).padding(horizontal = 4.dp), RoundedCornerShape(0.dp)
-            )
-
-            InformativeText("${receta.location.pais}, ${receta.location.regionName}")
-        }
+        LocationInformation(receta.location, Arrangement.Start,
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp))
 
     }
 }
 
-
 @Composable
 fun RecetaLayoutBottom(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController) {
-
-    val showAllTextLines = remember {
-        mutableStateOf(false)
-    }
 
     Column(modifier =  modifier) {
 
@@ -126,16 +115,14 @@ fun RecetaLayoutBottom(receta: Receta, modifier: Modifier = Modifier, navHost: N
 
         Divider(thickness = 1.dp)
 
-        ClickableCustomColor(onClick = { showAllTextLines.value = !showAllTextLines.value }) {
-            ParagraphText(receta.descripcion, maxLines = if (showAllTextLines.value) Int.MAX_VALUE else 3)
+        ClickableCustomColor {
+            ParagraphText(receta.descripcion, Modifier.padding(vertical = 4.dp), maxLines = 3)
         }
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-
             CustomButton(resourcedText = R.string.deseo_prepararlo, icon = Rounded.PlayArrow) {
                 navHost.navigate(AppScreens.detail.route+"/${receta.id}")
             }
-
         }
     }
 }

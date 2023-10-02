@@ -5,7 +5,6 @@ import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import javax.inject.Inject
 import javax.inject.Named
 
-class ObtenerUnaPorId @Inject constructor(@Named("IRecetaRepository") private val iRecetaRepository: IRecetaRepository) {
-    suspend operator fun invoke(id: Int) : Receta = iRecetaRepository.obtenerPorId(id)
-
+class ActualizarFavorito @Inject constructor(@Named("IRecetaRepository") private val iRecetaUseCases: IRecetaRepository) {
+    suspend operator fun invoke(receta: Receta) = iRecetaUseCases.actualizarFavorito(receta)
 }

@@ -4,8 +4,8 @@ import android.util.Log
 import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.data.api.recetas.RecetaApiDAO
 import com.ccastro.cooking.data.dataSources.local.daos.RecetaDAO
-import com.ccastro.cooking.data.mappers.RecetaMapper
 import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaApiDTOToReceta
+import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaToRecetaDBEntity
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import kotlinx.coroutines.GlobalScope
@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -91,6 +90,10 @@ class RecetaRepositoryImplement @Inject constructor(
         return receta
     }
 
+    override suspend fun actualizarFavorito(receta: Receta) {
+        recetaDbDAO.updateFavorito(id = receta.id, favorito = receta.favorito)
+    }
+
     private suspend fun persistenciaLocal(recetas: Flow<List<Receta>>) {
 
         Log.i(TAG,"Iniciando Persistencia local")
@@ -98,7 +101,7 @@ class RecetaRepositoryImplement @Inject constructor(
             recetas.collectLatest {
                     listRecetas ->
                 listRecetas.map {
-                    recetaDbDAO.insert(RecetaMapper.mapRecetaToRecetaDBEntity(it))
+                    recetaDbDAO.insert(mapRecetaToRecetaDBEntity(it))
                     Log.i(TAG,"Receta ${it.nombre} almacenada!")
 
                     // Podemos descomentarear para

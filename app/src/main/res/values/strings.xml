@@ -5,4 +5,8 @@
     <string name="deseo_prepararlo">Deseo prepararlo!</string>
     <string name="ic_mas">Icono mostrar mas texto</string>
     <string name="descripci_n">Descripción</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="preparaci_n">Preparación</string>
+    <string name="que_deseas_buscar">¿Que deseas buscar?</string>
+    <string name="buscar">Buscar</string>
 </resources>

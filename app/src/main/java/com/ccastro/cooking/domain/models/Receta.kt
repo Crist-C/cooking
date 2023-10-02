@@ -1,6 +1,6 @@
 package com.ccastro.cooking.domain.models
 
-open class Receta(
+class Receta(
     val id: Int = 0,
     val nombre: String,
     val imagenes: List<String>,
@@ -8,5 +8,6 @@ open class Receta(
     val ingredientes: List<Ingredientes>,
     val preparacion: String,
     val descripcion: String,
-    val favorito: Boolean = false
+    var favorito: Boolean = false
 )
+
