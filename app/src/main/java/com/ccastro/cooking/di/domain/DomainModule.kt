@@ -4,7 +4,6 @@ import com.ccastro.cooking.data.repositories.RecetaRepositoryImplement
 import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import com.ccastro.cooking.domain.useCases.receta.ActualizarFavorito
 import com.ccastro.cooking.domain.useCases.receta.ObtenerTodas
-import com.ccastro.cooking.domain.useCases.receta.ObtenerUnaPorId
 import com.ccastro.cooking.domain.useCases.receta.RecetaUseCasesImpement
 import com.ccastro.cooking.presentation.useCases.RecetaUseCases
 import dagger.Module
@@ -29,7 +28,6 @@ object DomainModule {
     @Named("RecetasCasosDeUso")
     fun provideRecetaCasosDeUso(@Named("IRecetaRepository") iRecetaRepository: IRecetaRepository) : RecetaUseCases =
         RecetaUseCasesImpement(
-            obtenerPorId = ObtenerUnaPorId(iRecetaRepository),
             obtenerTodas = ObtenerTodas(iRecetaRepository),
             actualizarFavorito = ActualizarFavorito(iRecetaRepository)
         )

@@ -7,8 +7,6 @@ interface RecetaUseCases {
 
     suspend fun getAll(): Flow<List<Receta>>
 
-    suspend fun getOneById(id: Int): Receta
-
     suspend fun updateFavorite(receta: Receta)
 
 }
