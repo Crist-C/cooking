@@ -1,10 +1,12 @@
 package com.ccastro.cooking.presentation.screens.details
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +18,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,8 +38,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.R
+import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.domain.models.Ingredientes
 import com.ccastro.cooking.domain.models.Receta
+import com.ccastro.cooking.presentation.components.especificos.ImagesPresentation
 import com.ccastro.cooking.presentation.components.genericos.ClickableCustomColor
 import com.ccastro.cooking.presentation.components.genericos.ImageCardResizable
 import com.ccastro.cooking.presentation.components.genericos.InformativeText
@@ -43,8 +49,11 @@ import com.ccastro.cooking.presentation.components.especificos.IngredienteItem
 import com.ccastro.cooking.presentation.components.especificos.LocationInformation
 import com.ccastro.cooking.presentation.components.genericos.ParagraphText
 import com.ccastro.cooking.presentation.components.especificos.PreparacionItem
+import com.ccastro.cooking.presentation.components.genericos.IconBackArrow
+import com.ccastro.cooking.presentation.components.genericos.IconImageClicked
 import com.ccastro.cooking.presentation.components.genericos.TittleSecondaryBoldText
 import com.ccastro.cooking.presentation.components.genericos.TittleText
+import com.ccastro.cooking.presentation.navigation.AppScreens
 import com.ccastro.cooking.presentation.ui.theme.Blue80
 import com.ccastro.cooking.presentation.ui.theme.BlueVariant40
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
@@ -64,106 +73,57 @@ fun DetailsContent(
     navHost: NavHostController
 ) {
 
-    val state = viewModel.state
-
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(start = 16.dp, top = 80.dp, end = 16.dp, bottom = 16.dp),
+            .padding(vertical = 40.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
 
-        ImagesPresentation(state.receta.imagenes, imagesSize = 250)
-        InformacionDeReceta(receta = state.receta, navHost = navHost)
-        IngredientesComponent(state.receta.ingredientes)
-        Preparacion(preparacion = state.receta.preparacion)
+        IconBackArrow(modifier = Modifier.fillMaxWidth()) {
+            navHost.navigate(AppScreens.Home.route)
+        }
+
+        ImagesPresentation(viewModel.receta.imagenes, imagesSize = 350)
+
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start
+        ) {
+
+            InformacionDeReceta(receta = viewModel.receta, navHost = navHost)
+            IngredientesComponent(viewModel.receta.ingredientes)
+            Preparacion(preparacion = viewModel.receta.preparacion)
+
+        }
 
     }
     
 }
 
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun ImagesPresentation(imagesList: List<String>, modifier: Modifier = Modifier, imagesSize: Int) {
-
-    val pageState = rememberPagerState(initialPage = 1)
-
-    Column(modifier = modifier.fillMaxSize(),verticalArrangement = Arrangement.Top)
-    {
-
-        HorizontalPager(
-            count = imagesList.size, state = pageState,
-            contentPadding = PaddingValues(horizontal = 120.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.9f)
-        )
-        { page ->
-            ImageCardResizable(
-                urlImage = imagesList[page],
-                calculateCurrentOffsetForPage(page).absoluteValue,
-                modifier = modifier, size = imagesSize)
-        }
-        StateDots(imagesList.size, pageState, Modifier.padding(top = 4.dp))
-
-    }
-
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun StateDots(count: Int, pageState: PagerState, modifier: Modifier = Modifier) {
-    val scope = rememberCoroutineScope()
-    val isThisSelected = remember {
-        mutableIntStateOf(0)
-    }
-    isThisSelected.intValue = pageState.currentPage
-
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        repeat(count) {
-            Divider(
-                thickness = 8.dp,
-                color = if (isThisSelected.intValue == it ) BlueVariant40 else Blue80,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .size(10.dp)
-                    .clip(CircleShape)
-                    .clickable {
-                        isThisSelected.intValue = it
-                        scope.launch {
-                            pageState.animateScrollToPage(it)
-                        }
-                    }
-            )
-        }
-    }
-}
 
 @Composable
 fun InformacionDeReceta(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController) {
 
     Column(modifier) {
         TittleText(text = receta.nombre)
-        Divider(thickness = 3.dp, modifier = Modifier.padding(1.dp))
+        Divider(thickness = 3.dp, modifier = Modifier.padding(top = 4.dp, bottom = 8.dp))
         ClickableCustomColor {
             ParagraphText(text = receta.descripcion)
         }
-        ClickableCustomColor {
-            LocationInformation(
-                location = receta.location, Arrangement.Start,
-                modifier = Modifier.wrapContentSize().padding(top = 8.dp),
-                navHost = navHost
-            )
-
-        }
+        LocationInformation(
+            receta = receta, Arrangement.Start,
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(top = 12.dp),
+            navHost = navHost
+        )
     }
 
 }
@@ -179,7 +139,7 @@ fun IngredientesComponent(listaIngredientes: List<Ingredientes>, modifier: Modif
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .padding(top = 24.dp, bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -211,20 +171,30 @@ fun IngredientesComponent(listaIngredientes: List<Ingredientes>, modifier: Modif
 fun Preparacion(preparacion: String, modifier: Modifier = Modifier) {
 
     val pagerState = rememberPagerState(initialPage = 0)
-    val procedimiento by remember {
-        mutableStateOf(preparacion.split("\\n"))
-    }
+    val procedimiento = preparacion.split("\n")
 
     Column(modifier) {
-        TittleSecondaryBoldText(text = stringResource(R.string.preparaci_n))
 
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            TittleSecondaryBoldText(text = stringResource(R.string.preparaci_n))
+            InformativeText(text = "${pagerState.currentPage+1} / ${procedimiento.size}")
+        }
         HorizontalPager(
-            modifier =  Modifier.padding(bottom = 24.dp),
+            modifier =  Modifier.padding(bottom = 40.dp, top = 16.dp),
             count = procedimiento.size,
             state = pagerState,
         )
         { page ->
-            PreparacionItem(procedimiento[page])
+            PreparacionItem(procedimiento[page], Modifier.padding(vertical = 16.dp))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(32.dp))
         }
 
     }
@@ -240,15 +210,4 @@ fun DetailsContentPreview() {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun ImageCarouselContentPreview() {
-    CookingTheme {
-        ImagesPresentation(imagesList = listOf(
-            "https://cdn.colombia.com/gastronomia/2011/07/28/sancocho-de-cola-1650.webp",
-            "https://cdn7.recetasdeescandalo.com/wp-content/uploads/2020/06/Aji-de-gallina.-Receta-peruana-tradicional-y-deliciosa.jpg.webp",
-            "https://www.megamaxi.com/wp-content/uploads/2023/03/Aji-de-gallina.jpg"),
-            imagesSize = 250
-        )
-    }
-}
+

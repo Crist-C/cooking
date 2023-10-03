@@ -18,27 +18,31 @@ fun AppNavigation(navHostController: NavHostController) {
         navController = navHostController,
         startDestination = AppScreens.Home.route
     ) {
+
         composable(route = AppScreens.Home.route) {
             HomeScreen(navHostController)
         }
-        composable(AppScreens.Detail.route+"/{${NavArguments.RecetaId.key}}",
-            arguments = listOf(navArgument(name = NavArguments.RecetaId.key) {
+
+        composable(AppScreens.Detail.route+"/{${NavArguments.Receta.key}}",
+            arguments = listOf(navArgument(name = NavArguments.Receta.key) {
             type = NavType.StringType
         }) ) {
-            DetailsScreen(navHostController, id = it.arguments?.getString(NavArguments.RecetaId.key))
+            it.arguments?.getString(NavArguments.Receta.key).let { locationString ->
+                DetailsScreen(navHostController, recetaJson = Uri.decode(locationString))
+            }
         }
-        composable(AppScreens.Map.route+"/{${NavArguments.Location.key}}",
-            arguments = listOf(navArgument(name = NavArguments.Location.key) {
+
+        composable(AppScreens.Map.route+"/{${NavArguments.Receta.key}}",
+            arguments = listOf(navArgument(name = NavArguments.Receta.key) {
             type = NavType.StringType
         })) {it->
-            it.arguments?.getString(NavArguments.Location.key).let { locationString->
-                MapScreen(navHostController, location = Uri.decode(locationString))
+            it.arguments?.getString(NavArguments.Receta.key).let { recetaJson ->
+                MapScreen(navHostController, recetaJson = Uri.decode(recetaJson))
             }
         }
     }
 }
 
 sealed class NavArguments(val key: String) {
-    object RecetaId: NavArguments("id")
-    object Location: NavArguments("location")
+    object Receta: NavArguments("receta")
 }

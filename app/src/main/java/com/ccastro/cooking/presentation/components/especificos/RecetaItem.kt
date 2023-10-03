@@ -24,9 +24,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.R
+import com.ccastro.cooking.core.Constants.gson
 import com.ccastro.cooking.domain.models.Ingredientes
 import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta
@@ -38,7 +40,9 @@ import com.ccastro.cooking.presentation.components.genericos.CustomButton
 import com.ccastro.cooking.presentation.components.genericos.IconImageClicked
 import com.ccastro.cooking.presentation.components.genericos.ImagesPresentation
 import com.ccastro.cooking.presentation.navigation.AppScreens
+import com.ccastro.cooking.presentation.screens.home.HomeViewModel
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
+import com.google.gson.Gson
 
 @Composable
 fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController) {
@@ -70,7 +74,7 @@ fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostCo
 }
 
 @Composable
-fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController){ //, viewModel: HomeViewModel = hiltViewModel()) {
+fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
     val favoriteState = remember {
         mutableStateOf(receta.favorito)
@@ -98,7 +102,7 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavH
             ) {
                 favoriteState.value = !favoriteState.value
                 receta.favorito = favoriteState.value
-                //viewModel.actualizarFavorito(receta)
+                viewModel.actualizarFavorito(receta)
             }
 
         }
@@ -107,7 +111,7 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavH
             Modifier.fillMaxWidth().padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.Start
         ) {
-            LocationInformation(receta.location, Arrangement.Start, navHost = navHost)
+            LocationInformation(receta, Arrangement.Start, navHost = navHost)
         }
 
     }
@@ -128,7 +132,7 @@ fun RecetaLayoutBottom(receta: Receta, modifier: Modifier = Modifier, navHost: N
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
             CustomButton(resourcedText = R.string.deseo_prepararlo, icon = Rounded.PlayArrow) {
-                navHost.navigate(AppScreens.Detail.route+"/${receta.id}")
+                navHost.navigate(AppScreens.Detail.passRecetaArgument(gson.toJson(receta)))
             }
         }
     }

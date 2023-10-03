@@ -102,6 +102,7 @@ fun ParagraphText(text: String, modifier: Modifier = Modifier, maxLines: Int = 3
         maxLines = if (showAllTextLines.value) Int.MAX_VALUE else maxLines,
         textAlign = TextAlign.Justify,
         style = MaterialTheme.typography.bodySmall,
+        fontSize = 13.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Ellipsis,
         modifier = modifier

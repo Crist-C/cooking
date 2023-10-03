@@ -65,7 +65,7 @@ class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val r
     private fun actualizarRecetas() {
 
         viewModelScope.launch{
-            recetasUseCases.getAll().collect(){
+            recetasUseCases.getAll().collect {
                 _recetas.value = it
             }
         }

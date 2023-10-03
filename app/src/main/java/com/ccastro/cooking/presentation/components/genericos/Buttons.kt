@@ -67,7 +67,7 @@ fun ClickableCustomColor( color: Color = Blue80, onClick: () -> Unit = {}, conte
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun DefaultButtonPreview(){
-    CookingTheme() {
+    CookingTheme {
         CustomButton(resourcedText = R.string.imagen_receta_descripcion, onClick = {})
     }
 }

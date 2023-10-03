@@ -103,9 +103,6 @@ class RecetaRepositoryImplement @Inject constructor(
                 listRecetas.map {
                     recetaDbDAO.insert(mapRecetaToRecetaDBEntity(it))
                     Log.i(TAG,"Receta ${it.nombre} almacenada!")
-
-                    // Podemos descomentarear para
-                    delay(200L)
                 }
             }
 

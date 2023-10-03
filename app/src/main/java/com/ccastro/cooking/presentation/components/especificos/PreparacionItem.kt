@@ -14,7 +14,7 @@ import com.ccastro.cooking.presentation.components.genericos.ContentText
 import com.ccastro.cooking.presentation.ui.theme.Blue40
 
 @Composable
-fun PreparacionItem(procedimiento: String) {
+fun PreparacionItem(procedimiento: String, modifier: Modifier = Modifier) {
     Surface(
         Modifier
             .fillMaxWidth()
