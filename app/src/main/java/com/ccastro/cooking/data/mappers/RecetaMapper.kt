@@ -6,18 +6,6 @@ import com.ccastro.cooking.domain.models.Receta
 
 object RecetaMapper {
 
-    fun mapRecetaToRecetaDTO(receta: Receta) : RecetaApiDTO {
-        return RecetaApiDTO(
-            id = receta.id,
-            nombreReceta = receta.nombre,
-            imagenes = receta.imagenes,
-            localizacion = receta.location,
-            ingredientes = receta.ingredientes,
-            procedimiento = receta.preparacion,
-            descripcion = receta.descripcion
-        )
-    }
-
     fun mapRecetaApiDTOToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
         return Receta(
             id = recetaApiDTO.id,
@@ -28,14 +16,6 @@ object RecetaMapper {
             preparacion = recetaApiDTO.procedimiento,
             descripcion = recetaApiDTO.descripcion
         )
-    }
-
-    fun mapListRecetaApiDTOToListReceta(listRecetaApiDTO: List<RecetaApiDTO>) : List<Receta> {
-
-        val listaRetorno: MutableList<Receta> = mutableListOf()
-        listRecetaApiDTO.map { listaRetorno.add( mapRecetaApiDTOToReceta(it)) }
-        return listaRetorno
-
     }
 
     fun mapRecetaToRecetaDBEntity(receta: Receta): RecetaDBEntity {
@@ -59,16 +39,9 @@ object RecetaMapper {
             location = recetaDBEntity.localizacion,
             ingredientes = recetaDBEntity.ingredientes,
             preparacion = recetaDBEntity.procedimiento,
-            descripcion = recetaDBEntity.resumen
+            descripcion = recetaDBEntity.resumen,
+            favorito = recetaDBEntity.favorito
         )
-    }
-
-    fun mapListRecetaDBEntityToListReceta(listRecetaDBEntity: List<RecetaDBEntity>) : List<Receta> {
-
-        val listaRetorno: MutableList<Receta> = mutableListOf()
-        listRecetaDBEntity.map { listaRetorno.add( mapRecetaDBEntityToReceta(it)) }
-        return listaRetorno
-
     }
 
 }

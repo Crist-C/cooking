@@ -100,14 +100,15 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavH
                     .clip(CircleShape)
             ) {
                 favoriteState.value = !favoriteState.value
-                receta.favorito = favoriteState.value
-                viewModel.actualizarFavorito(receta)
+                viewModel.actualizarFavorito(receta, favoriteState.value)
             }
 
         }
 
         Row(
-            Modifier.fillMaxWidth().padding(bottom = 8.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.Start
         ) {
             LocationInformation(receta, Arrangement.Start, navHost = navHost)

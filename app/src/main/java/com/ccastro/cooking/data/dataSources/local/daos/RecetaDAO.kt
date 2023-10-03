@@ -16,6 +16,9 @@ interface RecetaDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(receta: RecetaDBEntity)
 
+    @Query("SELECT count(idReceta) FROM recetas")
+    suspend fun countRecetas(): Int
+
     @Query("SELECT * FROM recetas")
     fun getAll(): Flow<List<RecetaDBEntity>>
 

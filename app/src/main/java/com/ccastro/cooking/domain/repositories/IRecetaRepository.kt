@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface IRecetaRepository {
     suspend fun obtenerTodasLasRecetas(): Flow<List<Receta>>
 
-    suspend fun obtenerPorId(id: Int): Receta
+    suspend fun obtenerDesdeBD(): Flow<List<Receta>>
 
     suspend fun actualizarFavorito(receta: Receta)
 

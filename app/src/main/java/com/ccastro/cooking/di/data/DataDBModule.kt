@@ -28,6 +28,6 @@ object DataDBModule {
     @Provides
     @Singleton
     @Named("RecetaDbDAO")
-    fun providesRecetaDAO(@Named("LocalDataBase") localDB: LocalDataBase): RecetaDAO = localDB.RecetasDAO()
+    fun providesRecetaDAO(@Named("LocalDataBase") localDB: LocalDataBase): RecetaDAO = localDB.recetasDAO()
 
 }

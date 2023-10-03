@@ -7,6 +7,7 @@ import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.useCases.RecetaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,11 +19,13 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val recetasUseCases: RecetaUseCases ): ViewModel() {
+
 
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
@@ -60,19 +63,18 @@ class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val r
 
     init {
         actualizarRecetas()
+
     }
-
     private fun actualizarRecetas() {
-
         viewModelScope.launch{
             recetasUseCases.getAll().collect {
                 _recetas.value = it
             }
         }
-
     }
 
-    fun actualizarFavorito(receta: Receta) {
+    fun actualizarFavorito(receta: Receta, value: Boolean) {
+        _recetas.value.find { it -> it.id == receta.id }.let { it?.favorito = value }
         viewModelScope.launch { recetasUseCases.updateFavorite(receta) }
     }
 
