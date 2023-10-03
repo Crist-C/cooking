@@ -14,19 +14,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.core.Constants.gson
-import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.components.genericos.AsyncImage
 import com.ccastro.cooking.presentation.components.genericos.InformativeText
 import com.ccastro.cooking.presentation.navigation.AppScreens
-import com.ccastro.cooking.presentation.ui.theme.CookingTheme
 import com.ccastro.cooking.presentation.ui.theme.Green200
-import com.google.gson.Gson
 
 @Composable
 fun LocationInformation(

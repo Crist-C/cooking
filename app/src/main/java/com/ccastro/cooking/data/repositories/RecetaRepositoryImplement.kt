@@ -9,7 +9,6 @@ import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaToRecetaDBEntity
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -77,7 +76,7 @@ class RecetaRepositoryImplement @Inject constructor(
         Log.i(TAG, "obtenerRecetasDesdeDB: Obteniendo desde BD")
         val listaRetorno: List<Receta> = emptyList()
 
-        val result = GlobalScope.launch { recetaDbDAO.getAll() }
+        GlobalScope.launch { recetaDbDAO.getAll() }
 
 
         Log.i(TAG, "Lista de retorno contiene : ${listaRetorno.size} elementos")

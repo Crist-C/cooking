@@ -32,17 +32,16 @@ import com.ccastro.cooking.core.Constants.gson
 import com.ccastro.cooking.domain.models.Ingredientes
 import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta
-import com.ccastro.cooking.presentation.components.genericos.ParagraphText
-import com.ccastro.cooking.presentation.components.genericos.TittleTerciaryText
-import com.ccastro.cooking.presentation.components.genericos.TittleText
 import com.ccastro.cooking.presentation.components.genericos.ClickableCustomColor
 import com.ccastro.cooking.presentation.components.genericos.CustomButton
 import com.ccastro.cooking.presentation.components.genericos.IconImageClicked
 import com.ccastro.cooking.presentation.components.genericos.ImagesPresentation
+import com.ccastro.cooking.presentation.components.genericos.ParagraphText
+import com.ccastro.cooking.presentation.components.genericos.TittleTerciaryText
+import com.ccastro.cooking.presentation.components.genericos.TittleText
 import com.ccastro.cooking.presentation.navigation.AppScreens
 import com.ccastro.cooking.presentation.screens.home.HomeViewModel
 import com.ccastro.cooking.presentation.ui.theme.CookingTheme
-import com.google.gson.Gson
 
 @Composable
 fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController) {

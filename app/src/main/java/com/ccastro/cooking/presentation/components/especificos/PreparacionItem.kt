@@ -16,7 +16,7 @@ import com.ccastro.cooking.presentation.ui.theme.Blue40
 @Composable
 fun PreparacionItem(procedimiento: String, modifier: Modifier = Modifier) {
     Surface(
-        Modifier
+        modifier
             .fillMaxWidth()
             .defaultMinSize(minHeight = 100.dp), shape = CircleShape,
         shadowElevation = 4.dp, color = Blue40

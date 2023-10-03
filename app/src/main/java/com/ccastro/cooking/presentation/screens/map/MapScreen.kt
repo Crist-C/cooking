@@ -2,7 +2,6 @@ package com.ccastro.cooking.presentation.screens.map
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,7 +28,7 @@ fun MapScreen(
             MapTop(navHost)
         },
         content = {
-            MapContent(navHost)
+            MapContent()
         },
         bottomBar = {}
     )

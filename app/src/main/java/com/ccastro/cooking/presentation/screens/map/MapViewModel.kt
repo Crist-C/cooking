@@ -3,7 +3,6 @@ package com.ccastro.cooking.presentation.screens.map
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.ccastro.cooking.core.Constants
-import com.ccastro.cooking.core.Utils
 import com.ccastro.cooking.core.Utils.parceRecetaJsonToReceta
 import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta

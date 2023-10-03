@@ -3,7 +3,6 @@ package com.ccastro.cooking.presentation.screens.map
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,7 +20,6 @@ import com.ccastro.cooking.presentation.components.genericos.AsyncImage
 import com.ccastro.cooking.presentation.components.genericos.IconBackArrow
 import com.ccastro.cooking.presentation.components.genericos.TittleTerciaryText
 import com.ccastro.cooking.presentation.components.genericos.TittleText
-import com.ccastro.cooking.presentation.navigation.AppScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +47,7 @@ fun MapTop(navHost: NavHostController, modifier: Modifier = Modifier, viewModel:
         },
         navigationIcon = {
             IconBackArrow(modifier = Modifier.wrapContentSize()) {
-                navHost.navigate(AppScreens.Home.route)
+                navHost.popBackStack()
             }
         }
     )
