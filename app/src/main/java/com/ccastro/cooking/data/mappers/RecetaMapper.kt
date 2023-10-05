@@ -1,12 +1,18 @@
 package com.ccastro.cooking.data.mappers
 
+import com.ccastro.cooking.core.Constants
 import com.ccastro.cooking.data.models.dto.RecetaApiDTO
 import com.ccastro.cooking.data.models.entities.RecetaDBEntity
 import com.ccastro.cooking.domain.models.Receta
+import com.google.gson.reflect.TypeToken
 
 object RecetaMapper {
 
-    fun mapRecetaApiDTOToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
+    fun parceRecetaJsonToReceta(recetaJson: String) : Receta {
+        return Constants.gson.fromJson(recetaJson, object : TypeToken<Receta>(){}.type)
+    }
+
+    fun mapRecetaApiDtoToReceta(recetaApiDTO: RecetaApiDTO) : Receta {
         return Receta(
             id = recetaApiDTO.id,
             nombre = recetaApiDTO.nombreReceta,
@@ -18,7 +24,7 @@ object RecetaMapper {
         )
     }
 
-    fun mapRecetaToRecetaDBEntity(receta: Receta): RecetaDBEntity {
+    fun mapRecetaToRecetaDbEntity(receta: Receta): RecetaDBEntity {
         return RecetaDBEntity(
             idReceta = receta.id,
             nombreReceta = receta.nombre,
@@ -31,7 +37,7 @@ object RecetaMapper {
         )
     }
 
-    fun mapRecetaDBEntityToReceta(recetaDBEntity: RecetaDBEntity): Receta {
+    fun mapRecetaDbEntityToReceta(recetaDBEntity: RecetaDBEntity): Receta {
         return Receta(
             id = recetaDBEntity.idReceta,
             nombre = recetaDBEntity.nombreReceta,

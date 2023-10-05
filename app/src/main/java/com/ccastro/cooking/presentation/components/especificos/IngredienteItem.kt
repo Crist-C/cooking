@@ -20,13 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.ccastro.cooking.domain.models.Ingredientes
+import com.ccastro.cooking.domain.models.Ingrediente
 import com.ccastro.cooking.presentation.components.genericos.ParagraphText
 import com.ccastro.cooking.presentation.ui.theme.Green40
 
 @Composable
 fun IngredienteItem(
-    ingrediente: Ingredientes, modifier: Modifier = Modifier,
+    ingrediente: Ingrediente, modifier: Modifier = Modifier,
     chekedLambda: () -> Unit = {}, unChekedLambda: () -> Unit = {}
 ) {
     var isChecked by remember {

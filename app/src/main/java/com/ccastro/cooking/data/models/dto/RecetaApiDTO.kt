@@ -1,6 +1,6 @@
 package com.ccastro.cooking.data.models.dto
 
-import com.ccastro.cooking.domain.models.Ingredientes
+import com.ccastro.cooking.domain.models.Ingrediente
 import com.ccastro.cooking.domain.models.Location
 
 data class RecetaApiDTO(
@@ -8,7 +8,7 @@ data class RecetaApiDTO(
     val nombreReceta: String,
     val imagenes: List<String>,
     val localizacion: Location,
-    val ingredientes: List<Ingredientes>,
+    val ingredientes: List<Ingrediente>,
     val procedimiento: String,
     val descripcion: String
 )

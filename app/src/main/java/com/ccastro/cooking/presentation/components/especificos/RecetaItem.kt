@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,7 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.R
 import com.ccastro.cooking.core.Constants.gson
-import com.ccastro.cooking.domain.models.Ingredientes
+import com.ccastro.cooking.domain.models.Ingrediente
 import com.ccastro.cooking.domain.models.Location
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.components.genericos.ClickableCustomColor
@@ -91,13 +92,14 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavH
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            TittleText(text = receta.nombre)
+            TittleText(text = receta.nombre,align = TextAlign.Start,modifier = Modifier.weight(0.9f))
 
             IconImageClicked(
                 iconResource = if(favoriteState.value) Rounded.Favorite else Rounded.FavoriteBorder,
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape)
+                    .weight(1f)
             ) {
                 favoriteState.value = !favoriteState.value
                 viewModel.actualizarFavorito(receta, favoriteState.value)
@@ -150,7 +152,7 @@ fun RecetaOnListPreview() {
                 nombre = "Sancocho",
                 imagenes = listOf("https://cdn.colombia.com/gastronomia/2011/07/28/sancocho-de-cola-1650.webp", "https://picsum.photos/id/10/500/700", "Url3"),
                 location = Location("https://www.flaticon.es/icono-gratis/peru_5344559","Perú",7.1,12.4, "Arequipa"),
-                ingredientes = listOf(Ingredientes("Papa", "1 libra")),
+                ingredientes = listOf(Ingrediente("Papa", "1 libra")),
                 preparacion = "Cocinar a fuego lento",
                 descripcion = "El \"Sancocho\" es una deliciosa preparación peruana que consiste en una papa cocida rellena de una mezcla sazonada de carne molida, cebolla, ajo, aceitunas, huevo duro y especias. La papa rellena se empaniza y se fríe hasta que esté dorada y crujiente por fuera. Es un platillo reconfortante y sabroso."
             ),

@@ -27,7 +27,8 @@ fun TittleText(text: String, modifier: Modifier = Modifier, align: TextAlign = T
         fontWeight = FontWeight.SemiBold,
         fontSize = 28.sp,
         modifier = modifier,
-        textAlign = align
+        textAlign = align,
+        lineHeight = 24.sp
     )
 
 }

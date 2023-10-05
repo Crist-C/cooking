@@ -26,7 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ccastro.cooking.R
-import com.ccastro.cooking.domain.models.Ingredientes
+import com.ccastro.cooking.domain.models.Ingrediente
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.components.especificos.ImagesPresentation
 import com.ccastro.cooking.presentation.components.especificos.IngredienteItem
@@ -108,7 +108,7 @@ fun InformacionDeReceta(receta: Receta, modifier: Modifier = Modifier, navHost: 
 }
 
 @Composable
-fun IngredientesComponent(listaIngredientes: List<Ingredientes>, modifier: Modifier = Modifier) {
+fun IngredientesComponent(listaIngredientes: List<Ingrediente>, modifier: Modifier = Modifier) {
 
     var ingredientesChuleados by remember {
         mutableIntStateOf(0)

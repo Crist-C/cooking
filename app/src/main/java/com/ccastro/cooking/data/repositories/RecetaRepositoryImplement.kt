@@ -4,9 +4,9 @@ import android.util.Log
 import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.data.api.recetas.RecetaApiDAO
 import com.ccastro.cooking.data.dataSources.local.daos.RecetaDAO
-import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaApiDTOToReceta
-import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaDBEntityToReceta
-import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaToRecetaDBEntity
+import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaApiDtoToReceta
+import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaDbEntityToReceta
+import com.ccastro.cooking.data.mappers.RecetaMapper.mapRecetaToRecetaDbEntity
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.domain.repositories.IRecetaRepository
 import kotlinx.coroutines.flow.Flow
@@ -53,7 +53,9 @@ class RecetaRepositoryImplement @Inject constructor(
         return flow<List<Receta>> {
             recetaDbDAO.getAll().collect {
                 it.map {recetaEntity ->
-                    listaRecetas.add(mapRecetaDBEntityToReceta(recetaEntity))
+                    mapRecetaDbEntityToReceta(recetaEntity)
+                        .takeIf { receta -> receta.isValid() }
+                        ?.let { recetaValida -> listaRecetas.add(recetaValida) }
                 }
                 emit(listaRecetas.toList())
             }
@@ -64,7 +66,7 @@ class RecetaRepositoryImplement @Inject constructor(
         return flow<List<Receta>> {
             emit(
                 recetaApiDAO.getAll().map {recetaEntity ->
-                    mapRecetaApiDTOToReceta(recetaEntity)
+                    mapRecetaApiDtoToReceta(recetaEntity)
                 }
             )
         }
@@ -85,7 +87,7 @@ class RecetaRepositoryImplement @Inject constructor(
             recetas.collectLatest {
                     listRecetas ->
                 listRecetas.map {
-                    recetaDbDAO.insert(mapRecetaToRecetaDBEntity(it))
+                    recetaDbDAO.insert(mapRecetaToRecetaDbEntity(it))
                     Log.i(TAG,"Receta ${it.nombre} almacenada!")
                 }
             }

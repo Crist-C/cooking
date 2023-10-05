@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.ccastro.cooking.domain.models.Location
 import com.google.gson.Gson
 
-class LocationConverter {
+class LocationMapper {
     @TypeConverter
     fun fromLocation(location: Location): String {
         return Gson().toJson(location)
