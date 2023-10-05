@@ -13,6 +13,8 @@ plugins {
     // Maps and Google Services
     id ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id ("com.google.gms.google-services")
+
+
 }
 
 android {
@@ -74,11 +76,23 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+
+    // Local Test
+    implementation(libs.mockito.core)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.junit.junit.v412)
+    testImplementation (libs.truth)
+    testImplementation (libs.truth.v114)
+
+    // Instrumentation test
+    androidTestImplementation (libs.truth)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.mockito.android)
+
+    // Debuggin
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 

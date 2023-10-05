@@ -2,20 +2,21 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DetailsContentPreview">
-        <State />
-      </entry>
-      <entry key="ImageCarouselContentPreview">
-        <State />
-      </entry>
-      <entry key="ImageIconClickedPreview">
-        <State />
-      </entry>
-      <entry key="ImagesLayoutPreview">
-        <State />
-      </entry>
       <entry key="app">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\Rentadvisor\.android\avd\Small_Phone_API_26.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-10-03T04:47:29.513089600Z" />
+        </State>
       </entry>
     </value>
   </component>
