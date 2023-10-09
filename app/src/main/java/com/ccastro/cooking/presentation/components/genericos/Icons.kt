@@ -2,6 +2,7 @@ package com.ccastro.cooking.presentation.components.genericos
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -37,9 +38,10 @@ fun IconImageClicked(iconResource: Any, modifier: Modifier = Modifier,
 
     val indication = rememberRipple(color = color) // Cambia el color aquí
     CompositionLocalProvider(LocalIndication provides indication) {
-        Surface(modifier = Modifier.clickable(onClick = clickFunction),
+        Surface(modifier = Modifier.clickable(onClick = clickFunction).background(Color.Transparent),
+            color = Color.Transparent,
             content = {
-                Box(modifier = modifier, contentAlignment = Alignment.Center) {
+                Box(modifier = modifier.background(Color.Transparent), contentAlignment = Alignment.Center) {
                     Divider(modifier = Modifier
                         .fillMaxSize()
                         .clickable { clickFunction.invoke() },
@@ -48,6 +50,7 @@ fun IconImageClicked(iconResource: Any, modifier: Modifier = Modifier,
                         imageVector = iconResource as ImageVector,
                         modifier = modifier
                             .wrapContentSize(align = Alignment.Center)
+                            .background(Color.Transparent)
                             .padding(0.dp),
                         contentScale = ContentScale.FillBounds,
                         contentDescription = "like icon",
@@ -63,17 +66,25 @@ fun IconImageClicked(iconResource: Any, modifier: Modifier = Modifier,
 fun IconBackArrow(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Row(
         modifier
-            .padding(horizontal = 16.dp)) {
+            .padding(horizontal = 16.dp).background(Color.Transparent)) {
         IconImageClicked(Icons.Outlined.ArrowBack,
             Modifier
                 .size(50.dp)
-                .clip(CircleShape)){
+                .clip(CircleShape).background(Color.Transparent)){
             onClick()
         }
     }
 }
 
 // ---------------------- PREVIEWS -------------------------- //
+@Preview
+@Composable
+fun IconBackArrowPreview(){
+    CookingTheme {
+        IconBackArrow(){}
+    }
+}
+
 @Preview
 @Composable
 fun ImageIconClickedPreview(){
