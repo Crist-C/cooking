@@ -95,7 +95,7 @@ Contiene el nombre y detalles de la ubicación.
 ## Estilos
 Se ha definido una guía de estilos para la tipografía y los colores, adaptada tanto a temas claros como oscuros y a diferentes tamaños de pantalla.
 
-##Consideraciones Finales
+## Consideraciones Finales
 Este proyecto se ha desarrollado siguiendo las mejores prácticas de la industria, lo que garantiza un código limpio, mantenible y escalable. Se ha prestado especial atención a la usabilidad y la experiencia del usuario, para proporcionar una aplicación intuitiva y eficiente.
 
-¡Esperamos que disfrutes explorando la aplicación! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
+¡Esperamos que disfrutes explorando la aplicación! Si tienes alguna pregunta o sugerencia, no dudes en comentarmela 😊.
