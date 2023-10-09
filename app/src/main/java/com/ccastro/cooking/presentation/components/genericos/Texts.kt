@@ -109,17 +109,30 @@ fun ParagraphText(text: String, modifier: Modifier = Modifier, maxLines: Int = 3
         textAlign = TextAlign.Justify,
         style = MaterialTheme.typography.bodySmall,
         fontSize = 13.sp,
-        color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Ellipsis,
         modifier = modifier
             .fillMaxWidth()
             .animateContentSize(animationSpec = spring(
                 dampingRatio = Spring.DampingRatioMediumBouncy,
                 stiffness = Spring.StiffnessLow
-            )
-
-            )
+            ))
             .clickable { showAllTextLines = !showAllTextLines }
+    )
+
+}
+
+@Composable
+fun DetailText(text: String, modifier: Modifier = Modifier, maxLines: Int = 3) {
+
+    Text(
+        text = text,
+        maxLines = maxLines,
+        textAlign = TextAlign.Justify,
+        style = MaterialTheme.typography.bodySmall,
+        fontSize = 13.sp,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+            .fillMaxWidth()
     )
 
 }

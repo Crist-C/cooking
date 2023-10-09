@@ -77,7 +77,6 @@ fun HomeScreenTopBar(navHost: NavHostController, viewModel: HomeViewModel = hilt
         if(isSearching) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator( modifier = Modifier
-                    .fillMaxSize()
                     .align(Alignment.Center))
             }
         } else {
