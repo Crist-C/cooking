@@ -21,7 +21,7 @@ object DataApisModule {
     @Singleton
     @Provides
     @Named("UrlBaseRecetas")
-    fun provideUrlBaseEndPointRecetas() = "https://demo0673634.mockable.io"
+    fun provideUrlBaseEndPointRecetas(): String = "https://demo0673634.mockable.io"
 
     @Provides
     @Named("APIClientRecetas")

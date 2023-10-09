@@ -1,13 +1,18 @@
 package com.ccastro.cooking.presentation.components.genericos
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -94,13 +99,13 @@ fun ContentText(text: String, modifier: Modifier = Modifier) {
 @Composable
 fun ParagraphText(text: String, modifier: Modifier = Modifier, maxLines: Int = 3) {
 
-    val showAllTextLines = remember {
+    var showAllTextLines by remember {
         mutableStateOf(false)
     }
 
     Text(
         text = text,
-        maxLines = if (showAllTextLines.value) Int.MAX_VALUE else maxLines,
+        maxLines = if (showAllTextLines) Int.MAX_VALUE else maxLines,
         textAlign = TextAlign.Justify,
         style = MaterialTheme.typography.bodySmall,
         fontSize = 13.sp,
@@ -108,7 +113,13 @@ fun ParagraphText(text: String, modifier: Modifier = Modifier, maxLines: Int = 3
         overflow = TextOverflow.Ellipsis,
         modifier = modifier
             .fillMaxWidth()
-            .clickable { showAllTextLines.value = !showAllTextLines.value }
+            .animateContentSize(animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow
+            )
+
+            )
+            .clickable { showAllTextLines = !showAllTextLines }
     )
 
 }

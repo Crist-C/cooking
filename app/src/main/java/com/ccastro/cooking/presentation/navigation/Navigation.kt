@@ -35,7 +35,7 @@ fun AppNavigation(navHostController: NavHostController) {
         composable(AppScreens.Map.route+"/{${NavArguments.Receta.key}}",
             arguments = listOf(navArgument(name = NavArguments.Receta.key) {
             type = NavType.StringType
-        })) {it->
+        })) {
             it.arguments?.getString(NavArguments.Receta.key).let { recetaJson ->
                 MapScreen(navHostController, recetaJson = Uri.decode(recetaJson))
             }

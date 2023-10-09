@@ -7,9 +7,7 @@ import com.ccastro.cooking.core.Constants.TAG
 import com.ccastro.cooking.domain.models.Receta
 import com.ccastro.cooking.presentation.useCases.RecetaUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,12 +17,12 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val recetasUseCases: RecetaUseCases ): ViewModel() {
+class HomeViewModel @Inject constructor(
+    @Named("RecetasCasosDeUso") private val recetasUseCases: RecetaUseCases ): ViewModel() {
 
 
     private val _searchText = MutableStateFlow("")
@@ -33,38 +31,38 @@ class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val r
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
+    private val _filtros = MutableStateFlow(mutableListOf<Receta.Filtros>(Receta.Filtros.Ninguno))
+    private var filtros = _filtros.asStateFlow()
+
     private val _recetas = MutableStateFlow(listOf(Receta()))
 
     @OptIn(FlowPreview::class)
-    val recetas = searchText
-        .debounce(1000L)
-        .onEach { _isSearching.update { true } }
-        .combine(_recetas) { text, recetas ->
-            if(text.isBlank()) {
-                recetas
-            } else {
-                delay(2000L)
-                Log.i(TAG, "Flitrado de recetas: ${recetas.size} : $recetas")
-                recetas.filter {
-                    it.encontrarCoincidencia(text)
-                }
-            }
+    val recetas = filtros
+        .onEach {
+
+            mostrarProgressBar(true)
+            actualizarRecetas()
+
         }
-        .onEach { _isSearching.update { false } }
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            _recetas.value
-        )
+        .combine(_recetas.combine(_searchText) {
 
-    fun onSearchTextChange(text: String) {
-        _searchText.value = text
-    }
+            recetas: List<Receta>, texto: String ->
+            encontrarRecetaPor(recetas, filtros.value, texto)
 
-    init {
-        actualizarRecetas()
+        }) {
 
-    }
+            _: MutableList<Receta.Filtros>, recetasFiltradas: List<Receta> -> recetasFiltradas.distinct()
+
+        }
+        .debounce(500L)
+        .onEach {
+
+            mostrarProgressBar(false)
+
+        }
+        .stateIn( viewModelScope, SharingStarted.Lazily, _recetas.value )
+
+
     private fun actualizarRecetas() {
         viewModelScope.launch{
             recetasUseCases.getAll().collect {
@@ -73,9 +71,59 @@ class HomeViewModel @Inject constructor(@Named("RecetasCasosDeUso")private val r
         }
     }
 
+    private fun encontrarRecetaPor(recetas: List<Receta>, filtros: List<Receta.Filtros>, value: Any) : List<Receta>{
+
+        var listResultante: List<Receta> = listOf()
+
+        if ( value.toString().isEmpty() && !filtros.contains(Receta.Filtros.Favorito)) return recetas
+
+        filtros.map { Log.i(TAG, "encontrarRecetasPor: ${it.filtro} : $value") }
+
+        filtros.map{filtro ->
+            listResultante = (
+                    listResultante +
+                            recetas.filter { receta -> receta.filterBy(filtro, value)
+                            })
+        }
+        return listResultante.distinct()
+    }
+
+    private fun mostrarProgressBar(mostrar: Boolean) {
+        _isSearching.update { mostrar }
+    }
+
+    fun onSearchTextChange(text: String) {
+        _searchText.value = text
+    }
+
+    fun agregarEliminarFiltro(filtro: Receta.Filtros) {
+
+        val filtrosActuales = filtros
+        actualizarRecetas()
+
+        if (!filtrosActuales.value.contains(filtro)) {
+
+            filtrosActuales.value.add(filtro)
+            if(filtrosActuales.value.contains(Receta.Filtros.Ninguno)){
+                filtrosActuales.value.remove(Receta.Filtros.Ninguno)
+            }
+
+        } else {
+            filtrosActuales.value.remove(filtro)
+            if(filtrosActuales.value.isEmpty()){
+                filtrosActuales.value.add(Receta.Filtros.Ninguno)
+            }
+        }
+        _filtros.update {
+            filtrosActuales.value
+        }
+        //_recetas.value = encontrarRecetaPor(recetas.value,filtros.value,searchText.value)
+    }
+
     fun actualizarFavorito(receta: Receta, value: Boolean) {
-        _recetas.value.find { it -> it.id == receta.id }.let { it?.favorito = value }
+        receta.favorito = value
         viewModelScope.launch { recetasUseCases.updateFavorite(receta) }
+        actualizarRecetas()
     }
 
 }

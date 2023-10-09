@@ -16,8 +16,10 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -76,9 +78,10 @@ fun RecetaItem(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostCo
 @Composable
 fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
-    val favoriteState = remember {
-        mutableStateOf(receta.favorito)
+    var favoriteState by remember {
+        mutableStateOf(false)
     }
+    favoriteState = receta.favorito
 
     Column(
         modifier = modifier.wrapContentSize(),
@@ -95,14 +98,14 @@ fun RecetaLayoutTop(receta: Receta, modifier: Modifier = Modifier, navHost: NavH
             TittleText(text = receta.nombre,align = TextAlign.Start,modifier = Modifier.weight(0.9f))
 
             IconImageClicked(
-                iconResource = if(favoriteState.value) Rounded.Favorite else Rounded.FavoriteBorder,
+                iconResource = if(favoriteState) Rounded.Favorite else Rounded.FavoriteBorder,
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape)
                     .weight(1f)
             ) {
-                favoriteState.value = !favoriteState.value
-                viewModel.actualizarFavorito(receta, favoriteState.value)
+                favoriteState = !favoriteState
+                viewModel.actualizarFavorito(receta, favoriteState)
             }
 
         }

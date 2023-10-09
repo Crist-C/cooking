@@ -2,7 +2,6 @@ package com.ccastro.cooking.domain.models
 
 import android.util.Log
 import com.ccastro.cooking.core.Constants.TAG
-import java.lang.Enum
 
 class Receta(
     val id: Int = 0,
@@ -16,19 +15,11 @@ class Receta(
 ) {
 
     // ------------------- MÉTODOS PARA LA CONSULTA DE COINCIDENCIAS ------------------ //
-    fun encontrarCoincidencia(valorDeBusqueda: String): Boolean {
-
-        Log.i(TAG, "encontrarCoincidencia: $valorDeBusqueda")
+    private fun encontrarCoincidencia(valorDeBusqueda: String): Boolean {
 
         if (contieneNombre(valorDeBusqueda)) return true
-
-        Log.i(TAG, "No se encontró en nombre: $valorDeBusqueda")
         if (contieneIngredientes(valorDeBusqueda)) return true
-
-        Log.i(TAG, "no se encontró en ingredientes: $valorDeBusqueda")
         if (contienePais(valorDeBusqueda)) return true
-
-        Log.i(TAG, "no se encontró en País: $valorDeBusqueda")
         return contieneRegion(valorDeBusqueda)
     }
 
@@ -85,14 +76,23 @@ class Receta(
     }
 
     fun filterBy(filtro: Filtros, value: Any): Boolean {
-        Log.i(TAG, "filterBy: ${filtro.filtro}")
-        return when(filtro) {
-            Filtros.Favorito -> isThisFavorite()
-            Filtros.Ingredientes -> contieneIngredientes(value.toString())
-            Filtros.Nombre -> contieneNombre(value.toString())
-            Filtros.Region -> contieneRegion(value.toString())
-            Filtros.Pais -> contienePais(value.toString())
-            else -> {encontrarCoincidencia(value.toString())}
+
+        return when(filtro.filtro) {
+            Filtros.Favorito.filtro -> {
+                if(value.toString().isEmpty()){ isThisFavorite() }
+                else {
+                    isThisFavorite() && encontrarCoincidencia(value.toString())
+                }
+            }
+            Filtros.Ingredientes.filtro -> contieneIngredientes(value.toString())
+            Filtros.Nombre.filtro -> contieneNombre(value.toString())
+            Filtros.Region.filtro -> contieneRegion(value.toString())
+            Filtros.Pais.filtro -> contienePais(value.toString())
+            Filtros.Ninguno.filtro -> {encontrarCoincidencia(value.toString())}
+            else -> {
+                Log.i(TAG, "filterBy: NO COINCIDIO CON ALGÚN FILTRO ${filtro.filtro}")
+                return false
+            }
         }
 
     }

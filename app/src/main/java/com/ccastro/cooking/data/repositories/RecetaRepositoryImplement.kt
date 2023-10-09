@@ -50,7 +50,7 @@ class RecetaRepositoryImplement @Inject constructor(
     override suspend fun obtenerDesdeBD(): Flow<List<Receta>> {
         val listaRecetas: MutableList<Receta> = mutableListOf()
 
-        return flow<List<Receta>> {
+        return flow {
             recetaDbDAO.getAll().collect {
                 it.map {recetaEntity ->
                     mapRecetaDbEntityToReceta(recetaEntity)
@@ -63,7 +63,7 @@ class RecetaRepositoryImplement @Inject constructor(
     }
 
     private suspend fun obtenerDesdeAPI(): Flow<List<Receta>> {
-        return flow<List<Receta>> {
+        return flow {
             emit(
                 recetaApiDAO.getAll().map {recetaEntity ->
                     mapRecetaApiDtoToReceta(recetaEntity)
